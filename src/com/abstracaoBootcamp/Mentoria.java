@@ -9,6 +9,11 @@ public class Mentoria extends Atividade {
     public Mentoria() {
     }
 
+    @Override
+    public double calcularXP() {
+        return 0;
+    }
+
     public LocalDate getData() {
         return data;
     }
@@ -20,8 +25,8 @@ public class Mentoria extends Atividade {
     @Override
     public String toString() {
         return "Mentoria{" +
-                "titulo='" + titulo + '\'' +
-                ", descricao='" + descricao + '\'' +
+                "titulo='" + getTitulo() + '\'' +
+                ", descricao='" + getDescricao() + '\'' +
                 ", data=" + data +
                 '}';
     }

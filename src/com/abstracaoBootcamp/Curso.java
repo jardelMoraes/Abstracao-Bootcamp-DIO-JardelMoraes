@@ -7,6 +7,11 @@ public class Curso extends Atividade {
     public Curso() {
     }
 
+    @Override
+    public double calcularXP() {
+        return 0;
+    }
+
     public int getCargaHoraria() {
         return cargaHoraria;
     }
@@ -18,8 +23,8 @@ public class Curso extends Atividade {
     @Override
     public String toString() {
         return "Curso{" +
-                "titulo='" + titulo + '\'' +
-                ", descricao='" + descricao + '\'' +
+                "titulo='" + getTitulo() + '\'' +
+                ", descricao='" + getDescricao() + '\'' +
                 ", cargaHoraria=" + cargaHoraria +
                 '}';
     }
