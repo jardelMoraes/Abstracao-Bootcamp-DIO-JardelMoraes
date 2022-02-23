@@ -1,13 +1,38 @@
 package com.abstracaoBootcamp;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.Objects;
+import java.util.Optional;
+
+
 public class Devs {
-
     private String nome;
-    private String mentoria;
-    private String atividade;
+    private Set<Conteudo> conteudosInscritos = new LinkedHashSet<>();
+    private Set<Conteudo> conteudosConcluidos = new LinkedHashSet<>();
 
-    public Devs() {
+    public void inscreverBootcamp(Bootcamp bootcamp){
+        this.conteudosInscritos.addAll(bootcamp.getConteudos());
+        bootcamp.getDevsInscritos().add(this);
     }
+
+    public void progredir() {
+        Optional<Conteudo> conteudo = this.conteudosInscritos.stream().findFirst();
+        if(conteudo.isPresent()) {
+            this.conteudosConcluidos.add(conteudo.get());
+            this.conteudosInscritos.remove(conteudo.get());
+        } else {
+            System.err.println("Você não está matriculado em nenhum conteúdo!");
+        }
+    }
+
+    public double calcularTotalXp() {
+        return this.conteudosConcluidos
+                .stream()
+                .mapToDouble(Conteudo::calcularXp)
+                .sum();
+    }
+
 
     public String getNome() {
         return nome;
@@ -17,19 +42,32 @@ public class Devs {
         this.nome = nome;
     }
 
-    public String getMentoria() {
-        return mentoria;
+    public Set<Conteudo> getConteudosInscritos() {
+        return conteudosInscritos;
     }
 
-    public void setMentoria(String mentorias) {
-        this.mentoria = mentorias;
+    public void setConteudosInscritos(Set<Conteudo> conteudosInscritos) {
+        this.conteudosInscritos = conteudosInscritos;
     }
 
-    public String getAtividade() {
-        return atividade;
+    public Set<Conteudo> getConteudosConcluidos() {
+        return conteudosConcluidos;
     }
 
-    public void setAtividades(String atividades) {
-        this.atividade = atividades;
+    public void setConteudosConcluidos(Set<Conteudo> conteudosConcluidos) {
+        this.conteudosConcluidos = conteudosConcluidos;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Devs dev = (Devs) o;
+        return Objects.equals(nome, dev.nome) && Objects.equals(conteudosInscritos, dev.conteudosInscritos) && Objects.equals(conteudosConcluidos, dev.conteudosConcluidos);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nome, conteudosInscritos, conteudosConcluidos);
     }
 }

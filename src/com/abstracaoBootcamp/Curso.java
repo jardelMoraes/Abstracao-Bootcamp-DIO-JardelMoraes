@@ -1,16 +1,17 @@
 package com.abstracaoBootcamp;
 
-public class Curso extends Atividade {
+public class Curso extends Conteudo {
 
     private int cargaHoraria;
+
+    @Override
+    public double calcularXp() {
+        return XP_PADRAO * cargaHoraria;
+    }
 
     public Curso() {
     }
 
-    @Override
-    public double calcularXP() {
-        return 0;
-    }
 
     public int getCargaHoraria() {
         return cargaHoraria;

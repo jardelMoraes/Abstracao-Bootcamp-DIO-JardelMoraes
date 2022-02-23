@@ -2,16 +2,16 @@ package com.abstracaoBootcamp;
 
 import java.time.LocalDate;
 
-public class Mentoria extends Atividade {
+public class Mentoria extends Conteudo {
 
     private LocalDate data;
 
-    public Mentoria() {
+    @Override
+    public double calcularXp() {
+        return XP_PADRAO + 20d;
     }
 
-    @Override
-    public double calcularXP() {
-        return 0;
+    public Mentoria() {
     }
 
     public LocalDate getData() {
